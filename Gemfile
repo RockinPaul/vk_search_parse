@@ -14,6 +14,7 @@ gem "twitter-bootstrap-rails"
 gem 'nokogiri'
 gem "nifty-generators"
 gem 'simple_form'
+gem 'engineyard'
 
 # Gems used only for assets and not required
 # in production environments by default.
