@@ -8,7 +8,7 @@ class HomeController < ApplicationController
     params[:c] ||= {}
     doc = Nokogiri::HTML(open("http://vk.com/search?" + params.to_param))
     @persons = []
-    doc.css('#results .clear_fix').each do |person|
+    doc.css('#results .clear_fix')[0..10].each do |person|
       link = 'http://vk.com' + person.css('.name a').first['href']
       account = Nokogiri::HTML(open(link))
       @persons << {
