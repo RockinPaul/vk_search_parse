@@ -1,0 +1,36 @@
+%br
+%br
+%br
+%br
+%h1 Поиск людей в интернете
+%br
+
+= simple_form_for :c, :method => :get, :html => {:class => 'form-horizondtal'} do |f|
+  - p = params[:c] || {}
+  = f.input :q, :label => false, input_html: {value: p[:q], class: 'input-xxlarge'}
+  = f.input :country, collection: @countries, :label => 'Страна', required: false, :selected => p[:country]
+  .input-prepend
+    = f.input :age_from, collection: 12..60, :label => 'Возраст от', required: false, input_html: {class: 'input-small'}, selected: p[:age_from]
+  .input-append
+    = f.input :age_to, collection: 12..60, :label => 'Возраст до', required: false, input_html: {class: 'input-small'}, selected: p[:age_to]
+  %br
+  = f.button :submit, 'Найти', :class => 'btn btn-primary'
+
+- if @persons
+  %table.table.table-striped
+    %tr
+      %th Фото
+      %th Имя
+      %th Образование
+      %th Дата рождения
+
+    - @persons.each do |person|
+      %tr
+        %td
+          = image_tag person[:photo]
+        %td
+          = link_to person[:name], person[:link]
+        %td
+          = person[:inst]
+        %td
+          = person[:birthday]
