@@ -1,28 +1,29 @@
 # 'defaults' applies to all environments running this application.
+# Environment specific options apply only to a single environment and override settings in defaults.
+---
 defaults:
-  bundle_without: test development mygroup  # exclude groups on bundle install (leave blank to remove --without)
-  bundle_options: --local                   # add extra options to the bundle install command line (does not override bundle_without)
-  copy_exclude:                             # don't rsync the following dirs
+  bundle_without: test development mygroup
+  bundle_options: --local
+  copy_exclude:
   - .git
-  maintenance_on_restart: false             # show maintenance page during app restart (default: false except for glassfish and mongrel)
-  maintenance_on_migrate: false             # show maintenance page during migrations (default: true)
-  precompile_assets: true                   # enables rails assets precompilation (default: inferred using app/assets and config/application.rb)
-  precomplie_assets_task: assets:precompile # override the assets:precompile rake task
-  precompile_unchanged_assets: true         # precompiles assets even if no changes would be detected (does not check for changes at all).
-  asset_dependencies: app/assets            # a list of relative paths to search for asset changes during each deploy.
-  assets_strategy: shifting                 # choose an alternet asset management strategy (shifting, cleaning, private, shared)
-  asset_roles: :all                         # specify on which roles to compile assets (default: [:app, :app_master, :solo] - must be an Array)
-  asset_roles:                              # (Array input for multiple roles) - Use hook deploy/before_compile_assets.rb for finer grained control.
+  maintenance_on_restart: false
+  maintenance_on_migrate: false
+  precompile_assets: true
+  precomplie_assets_task: assets:precompile
+  precompile_unchanged_assets: true
+  asset_dependencies: app/assets
+  assets_strategy: shifting
+  asset_roles:
   - :app
   - :app_master
   - :util
-  ignore_database_adapter_warning: true     # hide database adapter warning if you don't use MySQL or PostgreSQL (default: false)
-
-# Environment specific options apply only to a single environment and override settings in defaults.
+  ignore_database_adapter_warning: true
+  migrate: false
 environments:
   env_production:
-    precompile_unchanged_assets: true       # precompiles assets even if no changes would be detected (does not check for changes at all).
-    assets_strategy: shifting               # choose an alternet asset management strategy (shifting, cleaning, private, shared)
-    asset_roles: :all                       # specify on which roles to compile assets (default: [:app, :app_master, :solo] - must be an Array)
+    precompile_unchanged_assets: true
+    assets_strategy: shifting
+    asset_roles: :all
   env_staging:
-    assets_strategy: private                # Use an asset management that always refreshes, so staging enviroments don't get conflicts
+    assets_strategy: private
+  vk: {}
